@@ -1,0 +1,24 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eggobiggie/bamazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eggobiggie/bamazon/issues"
+  },
+  "homepage": "https://github.com/eggobiggie/bamazon#readme",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "mysql2": "^1.5.2"
+  }
+}
