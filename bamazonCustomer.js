@@ -37,9 +37,19 @@ function displayAll () {
                     let productResponse;
                         for (i = 0; i < results.length; i++) {
                             if (results[i].id === parseInt(answers.product)) {
-                                productResponse = results[i].id;
-                                console.log("Response is " + productResponse + " " + results[i].product_name + " $" + results[i].price);
+                                productResponse = results[i];
+                                console.log("Response is " + results[i].id + " " + results[i].product_name + " $" + results[i].price);
                             }
+                        }
+                        if (productResponse.stock_quantity >= answers.quantity) {
+                            //Subtracting quantity from stock
+                            console.log("Your order is: " + answers.quantity);
+                            console.log("Our stock is " + productResponse.stock_quantity);
+                            let newQuantity = productResponse.stock_quantity - answers.quantity;
+                            console.log("Our new quantity is " + newQuantity);
+                            //Multiplying price by quantity
+                            let newPrice = answers.quantity * productResponse.price;
+                            console.log("Your price is " + newPrice);
                         }
                     }
                 );
@@ -47,35 +57,6 @@ function displayAll () {
         }
 
 displayAll();
-
-//inquirer for asking customer what they would like to buy:
-// function whichProduct() {
-    
-//     inquirer.prompt([
-//         {
-//             type: "input",
-//             message: "\nWhich product (ID) would you like to purchase today?",
-//             name: "product"
-//         },
-//         {
-//             type: "input",
-//             message: "\nHow many?",
-//             name: "quantity"
-//         }
-//     ]).then(answers => {
-//         connection.query('SELECT `id` FROM `products`', function(err, results, fields) {
-//             if (err) throw err;
-//             let productResponse;
-//                 for (i = 0; i < results.length; i++) {
-//                     if (results[i].id === parseInt(answers.product)) {
-//                         productResponse = results[i].id;
-//                         console.log("Response is " + productResponse);
-//                     }
-//                 }
-//             }
-//         );
-//     });
-// }
 
 
 
