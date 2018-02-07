@@ -22,41 +22,60 @@ function displayAll () {
             for (i = 0; i < results.length; i++) {
                 console.log("Product ID: " + results[i].id + " | Product: " + results[i].product_name + " | Department: " + results[i].department_name + " | Price: $" + results[i].price); // results contains rows returned by server
             }
-            whichProduct();
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "\nWhich product (ID) would you like to purchase today?",
+                    name: "product"
+                },
+                {
+                    type: "input",
+                    message: "\nHow many?",
+                    name: "quantity"
+                }
+            ]).then(answers => {
+                    let productResponse;
+                        for (i = 0; i < results.length; i++) {
+                            if (results[i].id === parseInt(answers.product)) {
+                                productResponse = results[i].id;
+                                console.log("Response is " + productResponse + " " + results[i].product_name + " $" + results[i].price);
+                            }
+                        }
+                    }
+                );
+            });
         }
-    );
-}
 
 displayAll();
 
 //inquirer for asking customer what they would like to buy:
-function whichProduct() {
+// function whichProduct() {
     
-    inquirer.prompt([
-        {
-            type: "input",
-            message: "\nWhich product (ID) would you like to purchase today?",
-            name: "product"
-        },
-        {
-            type: "input",
-            message: "\nHow many?",
-            name: "quantity"
-        }
-    ]).then(answers => {
-        connection.query('SELECT `id` FROM `products`', function(err, results, fields) {
-            if (err) throw err;
-            let productResponse;
-                for (i = 0; i < results.length; i++) {
-                    if (results[i].id === parseInt(answers.product)) {
-                        productResponse = results[i].id;
-                        console.log("Response is " + productResponse);
-                    }
-                }
-            }
-        );
-    });
-}
+//     inquirer.prompt([
+//         {
+//             type: "input",
+//             message: "\nWhich product (ID) would you like to purchase today?",
+//             name: "product"
+//         },
+//         {
+//             type: "input",
+//             message: "\nHow many?",
+//             name: "quantity"
+//         }
+//     ]).then(answers => {
+//         connection.query('SELECT `id` FROM `products`', function(err, results, fields) {
+//             if (err) throw err;
+//             let productResponse;
+//                 for (i = 0; i < results.length; i++) {
+//                     if (results[i].id === parseInt(answers.product)) {
+//                         productResponse = results[i].id;
+//                         console.log("Response is " + productResponse);
+//                     }
+//                 }
+//             }
+//         );
+//     });
+// }
 
 
 
