@@ -38,7 +38,7 @@ function displayAll () {
                         for (i = 0; i < results.length; i++) {
                             if (results[i].id === parseInt(answers.product)) {
                                 productResponse = results[i];
-                                console.log("Response is " + results[i].id + " " + results[i].product_name + " $" + results[i].price);
+                                console.log("You chose: " + results[i].product_name + " for $" + results[i].price);
                             }
                         }
                         if (productResponse.stock_quantity >= answers.quantity) {
@@ -49,14 +49,34 @@ function displayAll () {
                             console.log("Our new quantity is " + newQuantity);
                             //Multiplying price by quantity
                             let newPrice = answers.quantity * productResponse.price;
-                            console.log("Your price is " + newPrice);
+                            console.log("This will cost you $" + newPrice);
+                            startOver();
+                        } else {
+                            console.log("Sorry, not enough in stock for you");
+                            startOver();
                         }
-                    }
-                );
+                });
             });
         }
 
 displayAll();
+
+//Function asking if user would like to start over - starts function over again if yes, exits program if no
+function startOver() {
+    inquirer.prompt([
+        {
+            type: "confirm",
+            message: "Would you like to buy something else?",
+            name: "confirm"
+        }
+    ]).then(answers => {
+        if (answers.confirm) {
+            displayAll();
+        } else {
+            process.exit(1);
+        }
+    });
+}
 
 
 
